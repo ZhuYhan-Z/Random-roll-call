@@ -1,15 +1,23 @@
-from pathlib import Path
 import json
 import importlib
-
+import time
+from actions import deng_ji, delete, show
 while True:
-    choose_manage = input("\t输入“1“”登记新学生\n\t输入“2”移除现有学生\n\t输入“3”显示现有学生")
+    choose_manage = int(input("\t输入“1“”登记新学生\n\t输入“2”移除现有学生\n\t输入“3”显示现有学生\n\t输入“4”退回主界面\n"))
     if choose_manage == 1:
-        action = importlib.import_module("action")
+        new_name = input("登记新学生:")
+        deng_ji(new_name)
+        break
     elif choose_manage == 2:
-        action = importlib.import_module("action")
+        delete_name = input("删除学生:")
+        delete(delete_name)
+        break
     elif choose_manage == 3:
-        action = importlib.import_module("action")
+        show()
+        break
+    elif choose_manage == 4:
+        break
     else:
         print("错误，请重新输入\n")
         time.sleep(0.5)
+
