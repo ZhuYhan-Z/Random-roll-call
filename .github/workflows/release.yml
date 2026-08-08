@@ -14,15 +14,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: '3.13'
       - run: |
           pip install -r requirements.txt
           pip install pyinstaller
-      - run: pyinstaller --name "myapp" --onefile --console main.py
-      - run: tar -czf myapp-linux.tar.gz dist/myapp
+      - run: pyinstaller --name "random-roll-call" --onefile --console manage.py
+      - run: tar -czf random-roll-call-linux.tar.gz dist/random-roll-call
       - uses: softprops/action-gh-release@v2
         with:
-          files: myapp-linux.tar.gz
+          files: random-roll-call-linux.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -32,14 +32,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: '3.13'
       - run: |
           pip install -r requirements.txt
           pip install pyinstaller
-      - run: pyinstaller --name "myapp" --onefile --console main.py
-      - run: Compress-Archive -Path dist/myapp.exe -DestinationPath myapp-windows.zip
+      - run: pyinstaller --name "random-roll-call" --onefile --console manage.py
+      - run: Compress-Archive -Path dist/random-roll-call.exe -DestinationPath random-roll-call-windows.zip
       - uses: softprops/action-gh-release@v2
         with:
-          files: myapp-windows.zip
+          files: random-roll-call-windows.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
