@@ -7,14 +7,11 @@ while True:
     if choose_manage == 1:
         new_name = input("登记新学生:")
         deng_ji(new_name)
-        break
     elif choose_manage == 2:
         delete_name = input("删除学生:")
         delete(delete_name)
-        break
     elif choose_manage == 3:
         show()
-        break
     elif choose_manage == 4:
         break
     else:

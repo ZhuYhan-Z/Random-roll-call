@@ -1,0 +1,45 @@
+name: Release Build
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+      - run: pyinstaller --name "myapp" --onefile --console main.py
+      - run: tar -czf myapp-linux.tar.gz dist/myapp
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: myapp-linux.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+      - run: pyinstaller --name "myapp" --onefile --console main.py
+      - run: Compress-Archive -Path dist/myapp.exe -DestinationPath myapp-windows.zip
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: myapp-windows.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

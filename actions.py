@@ -42,3 +42,4 @@ def show():
         json_list = json.load(f)
     for name in json_list:
         print(name)
+    print("已展示所有学生")
