@@ -1,6 +1,13 @@
 import random
 import json
 
+
+def load_names():
+    """从文件读取学生名单"""
+    with open("name_list.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def roll_call(names):
     """从names里随机抽取一个并返还"""
     roll_name = random.choice(names)
