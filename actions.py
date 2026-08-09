@@ -14,7 +14,7 @@ def roll_call(names):
     return roll_name
 
 
-def deng_ji(new_name):
+def add_name(new_name):
     """在json文件中新增一个学生名并保存"""
     with open("name_list.json","r",encoding = "utf-8") as f:
         json_list = json.load(f)
@@ -24,22 +24,23 @@ def deng_ji(new_name):
         json.dump(json_list,f, ensure_ascii = False, indent = 2)
 
 
-def delete(delete_name):
+def delete_name(delete_name):
     """从json文件中删除输入的学生名并重新保存"""
     with open("name_list.json","r",encoding = "utf-8") as f:
         json_list = json.load(f)
     if delete_name in json_list:
         json_list.remove(delete_name)
     else:
-        print(f"学生{delete_name}不在名单中")
+        print(f"\n\t学生{delete_name}不在名单中\n")
     with open("name_list.json","w",encoding = "utf-8") as f:
         json.dump(json_list,f, ensure_ascii = False, indent = 2)
 
 
-def show():
+def show_name():
     """遍历json文件中的学生名"""
     with open("name_list.json","r",encoding = "utf-8") as f:
         json_list = json.load(f)
+    print('\n')
     for name in json_list:
         print(name)
-    print("已展示所有学生")
+    print("\n\t已展示所有学生\n")
