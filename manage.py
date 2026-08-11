@@ -1,7 +1,7 @@
 import json
 import importlib
 import time
-from actions import add_name, delete_name, show_name, load_names
+from actions import add_name, delete_name, show_name, load_names, delete_all
 
 
 while True:
@@ -14,12 +14,18 @@ while True:
         if choose_manage == 1:
             new_name = input("登记新学生:")
             add_name(new_name)
+            print(f"已添加新学生{new_name}")
         elif choose_manage == 2:
             if not json_list:
                 print("\n\t名单为空，请先添加学生\n")
             else:
-                deleted_name = input("\t删除学生:")
-                delete_name(deleted_name)
+                deleted_name = input("\t删除学生(输入“delete all”删除名单内全部学生):")
+                if deleted_name == "delete all":
+                    delete_all()
+                    print("已删除名单内所有学生")
+                else:
+                    delete_name(deleted_name)
+                    print(f"已删除学生{deleted_name}")
         elif choose_manage == 3:
             if not json_list:
                 print("\n\t名单为空，请先添加学生\n")
